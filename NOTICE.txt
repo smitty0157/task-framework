@@ -1,2 +1,5 @@
 task-framework
-Copyright 2015 Christopher W. Smith theupstairs@hotmail.com. All Rights Reserved. 
+Copyright 2015 Christopher W. Smith
+
+This product contains software developed by
+Christopher W. Smith (theupstairs@hotmail.com)
