@@ -3,7 +3,7 @@ Task List, To-Do List, Javascript front end framework for organizing and managin
 
 ## Requirements
 
-Currently this project should run in most current web browsers.
+This project should run in most current web browsers.
 
 ## Running the Application
 
