@@ -11,3 +11,36 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
+function addListItem () {
+	
+	var newTaskTitle = document.getElementById("in-task-name").value;
+	if (newTaskTitle.trim() != '') {
+		var ul = document.getElementById("task-list");
+		var li = document.createElement("li");
+		li.appendChild(document.createTextNode(newTaskTitle));
+//		li.setAttribute("id",liOrderNumber);
+		ul.appendChild(li);
+	}
+}
+
+function keyEventNewTask (e) {
+
+	// add the new task to the list if the enter key is pressed
+	var key = e.which || e.keycode || e.key;
+	if (key == 13) {
+		addListItem();
+	}
+}
+
+function loadTaskFramework() {
+
+	// add the footer and confirm JScript is running
+    var feet = document.getElementsByTagName('footer');
+    feet[0].innerHTML = "Let's Do This";
+
+    // register an event handler for the new task input element
+	var objNewTask = document.getElementById("in-task-name");
+	objNewTask.addEventListener('keydown', keyEventNewTask, false);
+}
+onload = loadTaskFramework;
