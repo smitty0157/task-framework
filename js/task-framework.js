@@ -13,21 +13,23 @@
 // limitations under the License.
 
 function addListItem () {
-	var liOrderNumber = 0;
-	var newTaskTitle = document.getElementById("add-task");
-	var ul = document.getElementById("task-list");
-	var li = document.createElement("li");
-	li.appendChild(document.createTextNode(newItem));
-	li.setAttribute("id",liOrderNumber);
-	liOrderNumber++;
-	ul.appendChild(li);
-	alert(li.id);
+	
+	var newTaskTitle = document.getElementById("in-task-name").value;
+	if (newTaskTitle.trim() != '') {
+		var ul = document.getElementById("task-list");
+		var li = document.createElement("li");
+		li.appendChild(document.createTextNode(newTaskTitle));
+//		li.setAttribute("id",liOrderNumber);
+		ul.appendChild(li);
+	}
 }
 
-function testFunction (e) {
+function keyEventNewTask (e) {
+
+	// add the new task to the list if the enter key is pressed
 	var key = e.which || e.keycode || e.key;
-	if ( key == 13) {
-		window.alert("Enter key pressed");
+	if (key == 13) {
+		addListItem();
 	}
 }
 
@@ -39,6 +41,6 @@ function loadTaskFramework() {
 
     // register an event handler for the new task input element
 	var objNewTask = document.getElementById("in-task-name");
-	objNewTask.addEventListener('keydown', testFunction, false);
+	objNewTask.addEventListener('keydown', keyEventNewTask, false);
 }
 onload = loadTaskFramework;
