@@ -12,35 +12,44 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-function addListItem () {
-	
-	var newTaskTitle = document.getElementById("in-task-name").value;
-	if (newTaskTitle.trim() != '') {
-		var ul = document.getElementById("task-list");
-		var li = document.createElement("li");
-		li.appendChild(document.createTextNode(newTaskTitle));
-//		li.setAttribute("id",liOrderNumber);
-		ul.appendChild(li);
-	}
+"use strict";
+
+function addListItem() {
+  var taskNameElem = document.getElementById("input-task-name");
+  var ul = document.getElementById("task-list");
+  var li = document.createElement("li");
+
+	// if there is text in the task title input element add it to the task list
+  if (taskNameElem.value.trim() !== "") {
+    li.appendChild(document.createTextNode(taskNameElem.value));
+    // li.setAttribute("id",liOrderNumber);
+    ul.appendChild(li);
+
+    // Clear the new task input
+    taskNameElem.value = "";
+  }
 }
 
-function keyEventNewTask (e) {
+function keyEventNewTask(e) {
+  var key = e.which || e.keycode || e.key;
 
-	// add the new task to the list if the enter key is pressed
-	var key = e.which || e.keycode || e.key;
-	if (key == 13) {
-		addListItem();
-	}
+  // add the new task to the list if the enter key is pressed
+  if (key === 13) {
+    addListItem();
+  }
 }
 
 function loadTaskFramework() {
+  var footer = document.getElementsByTagName("footer");
+  var taskNameElem = document.getElementById("input-task-name");
 
-	// add the footer and confirm JScript is running
-    var feet = document.getElementsByTagName('footer');
-    feet[0].innerHTML = "Let's Do This";
+  // add the footer and confirm JScript is running
+  footer[0].innerHTML = "Let's Do This";
 
-    // register an event handler for the new task input element
-	var objNewTask = document.getElementById("in-task-name");
-	objNewTask.addEventListener('keydown', keyEventNewTask, false);
+  // register an event handler for the new task input element
+  taskNameElem.addEventListener("keydown", keyEventNewTask, false);
+
+  // Clear the new task input on a page refresh
+  taskNameElem.value = "";
 }
 onload = loadTaskFramework;
