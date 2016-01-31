@@ -12,35 +12,40 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-function addListItem () {
+function taskListFramework(taskListTagIDs) {
+	// Validate function arguments and set default values
+	taskListTagIDs = typeof taskListTagIDs !== 'undefined' ? taskListTagIDs : {};
+	taskListTagIDs.newTaskName = typeof taskListTagIDs.newTaskName !== 'undefined' ? taskListTagIDs.newTaskName : "new-task-name";
+	taskListTagIDs.taskList = typeof taskListTagIDs.taskList !== 'undefined' ? taskListTagIDs.taskList : "task-list";
 	
-	var newTaskTitle = document.getElementById("in-task-name").value;
-	if (newTaskTitle.trim() != '') {
-		var ul = document.getElementById("task-list");
-		var li = document.createElement("li");
-		li.appendChild(document.createTextNode(newTaskTitle));
-//		li.setAttribute("id",liOrderNumber);
-		ul.appendChild(li);
+	var newTaskNameElement = document.getElementById(taskListTagIDs.newTaskName);
+	var taskListElement = document.getElementById(taskListTagIDs.taskList);
+	
+	newTaskNameElement.addEventListener('keydown', keyEventNewTask, false);
+	
+	// Replace message that app requires JScript
+	var tlFooter = document.querySelectorAll('footer.tasklist')[0];
+	tlFooter.innerHTML = "Let's Do This";
+	
+	function addListItem () {
+		
+		var newTaskName = newTaskNameElement.value;
+		if (newTaskName.trim() !== '') {
+			var li = document.createElement("li");
+			li.appendChild(document.createTextNode(newTaskName));
+	//		li.setAttribute("id",liOrderNumber);
+			taskListElement.appendChild(li);
+		}
+	}
+
+	function keyEventNewTask (e) {
+
+		// add the new task to the list if the enter key is pressed
+		var key = e.which || e.keycode || e.key;
+		if (key === 13) {
+			addListItem();
+		}
 	}
 }
+taskListFramework(); 
 
-function keyEventNewTask (e) {
-
-	// add the new task to the list if the enter key is pressed
-	var key = e.which || e.keycode || e.key;
-	if (key == 13) {
-		addListItem();
-	}
-}
-
-function loadTaskFramework() {
-
-	// add the footer and confirm JScript is running
-    var feet = document.getElementsByTagName('footer');
-    feet[0].innerHTML = "Let's Do This";
-
-    // register an event handler for the new task input element
-	var objNewTask = document.getElementById("in-task-name");
-	objNewTask.addEventListener('keydown', keyEventNewTask, false);
-}
-onload = loadTaskFramework;
