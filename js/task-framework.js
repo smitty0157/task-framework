@@ -16,14 +16,17 @@
 
 function addListItem() {
   var taskNameElem = document.getElementById("input-task-name");
+  var taskName = taskNameElem.value.trim();
   var ul = document.getElementById("task-list");
   var li = document.createElement("li");
 
 	// if there is text in the task title input element add it to the task list
-  if (taskNameElem.value.trim() !== "") {
+  if (taskName !== "") {
     li.appendChild(document.createTextNode(taskNameElem.value));
     // li.setAttribute("id",liOrderNumber);
     ul.appendChild(li);
+    // add item to local storage
+    localStorage.setItem(taskName, taskName);
 
     // Clear the new task input
     taskNameElem.value = "";
@@ -38,6 +41,19 @@ function keyEventNewTask(e) {
     addListItem();
   }
 }
+
+// local storage function
+// function to encapsulate local storage functions and objects
+// function storageTaskFramework() {
+// test for local storage support
+// if(typeof(Storage) !== "undefined") {
+    // Code for localStorage/sessionStorage.
+// } else {
+    // Sorry! No Web Storage support..
+// }
+// }
+
+function storeTask() {}
 
 function loadTaskFramework() {
   var footer = document.getElementsByTagName("footer");
